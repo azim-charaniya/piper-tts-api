@@ -26,6 +26,9 @@ RUN apt-get update && apt-get install -y ffmpeg
 # Copy the rest of the application code
 COPY . .
 
+# Copy the voices folder into the container
+COPY voices /app/voices
+
 # Expose the port
 EXPOSE 17100
 
