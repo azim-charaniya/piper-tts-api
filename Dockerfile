@@ -23,6 +23,10 @@ RUN pip install --upgrade onnxruntime onnx
 # install ffmpeg
 RUN apt-get update && apt-get install -y ffmpeg
 
+# install espeak-ng
+!apt-get -qq -y install espeak-ng > /dev/null 2>&1
+
+
 # Copy the rest of the application code
 COPY . .
 
