@@ -110,6 +110,26 @@ Docker Problems: Run docker-compose logs for details, or rebuild with docker-com
 
 Feel free to fork this repository and submit pull requests. For issues, create a new ticket on GitHub.
 
+### Docker Compose
+
+```yaml
+version: '3.9'
+
+services:
+  tts-api:
+    image: piper-tts-api:latest
+    build: # Build the image from the Dockerfile
+      context: https://github.com/azim-charaniya/piper-tts-api.git
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:17100:17100"
+    volumes:
+      - ./cache:/app/cache  
+    environment:
+      - APP_PORT=17100
+    restart: unless-stopped
+
+```
 
 ### Additional Notes
 - **Why These Files?** The `docker-compose.yml` simplifies deployment and scaling, while the `README.md` makes your project more accessible and user-friendly, encouraging contributions.
