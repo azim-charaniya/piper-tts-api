@@ -74,54 +74,72 @@ The API uses a POST endpoint at `/tts`. Send a JSON body with the following para
 "noise_w": "Optional. Phoneme width noise (e.g., 0.3).",
 "sentence_silence": "Optional. Seconds of silence after sentences (default: 0.0)."
 }
+```
 
-
-Example cURL Requests
+## Example cURL Requests
 
 Use these to test the API:
 
 
-    Basic Request:
+### Basic Request:
 
+```bash
 curl -X POST "http://localhost:17100/tts" \
      -H "Content-Type: application/json" \
      -d '{"text": "Hello, world!", "voice": "en_us"}' \
      -o output.wav
+```
 
+### With Additional Parameters:
 
-With Additional Parameters:
-
+```bash
 curl -X POST "http://localhost:17100/tts" \
      -H "Content-Type: application/json" \
      -d '{"text": "This is a test.", "voice": "en_gb", "format": "mp3", "speaker_id": 1}' \
      -o output.mp3
+```
 
-Troubleshooting
+### Troubleshooting
 
+Errors with Voice Models: Ensure files are in the voices/ directory. Check logs for file not found errors.
+Port Conflicts: If port 17100 is in use, change APP_PORT in app.py.
+Conda Issues: If dependencies fail, recreate the environment with conda env update -f environment.yml.
+Docker Problems: Run docker-compose logs for details, or rebuild with docker-compose build --no-cache.
 
-    Errors with Voice Models: Ensure files are in the voices/ directory. Check logs for file not found errors.
-
-    Port Conflicts: If port 17100 is in use, change APP_PORT in app.py.
-
-    Conda Issues: If dependencies fail, recreate the environment with conda env update -f environment.yml.
-
-    Docker Problems: Run docker-compose logs for details, or rebuild with docker-compose build --no-cache.
-
-
-Contributing
+### Contributing
 
 Feel free to fork this repository and submit pull requests. For issues, create a new ticket on GitHub.
-
-License
-
-# MIT License. See LICENSE for details.
 
 
 ### Additional Notes
 - **Why These Files?** The `docker-compose.yml` simplifies deployment and scaling, while the `README.md` makes your project more accessible and user-friendly, encouraging contributions.
-- **Next Steps:** 
-  - Commit these files to your GitHub repository.
-  - Test the setup locally to ensure everything works as expected.
-  - If you need further customizations (e.g., adding more services or environment variables), let me know!
+- **Next Steps:**
+    - Commit these files to your GitHub repository.
+    - Test the setup locally to ensure everything works as expected.
+    - If you need further customizations (e.g., adding more services or environment variables), let me know!
 
 This should wrap up your project setup. If you have any more questions, I'm here to help!
+
+### MIT License.
+
+MIT License
+
+Copyright (c) 2025 Azim Charaniya (azim.one)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
