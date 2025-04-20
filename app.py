@@ -211,4 +211,5 @@ def generate_audio_by_splitting(format_param, length_scale, noise_scale, noise_w
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=APP_PORT, debug=True)
+    debug_mode = os.getenv('FLASK_DEBUG', 'false').lower() == 'true'
+    app.run(host='0.0.0.0', port=APP_PORT, debug=debug_mode)

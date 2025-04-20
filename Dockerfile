@@ -22,7 +22,6 @@ RUN conda env create -f environment.yml && \
 # ONNX Runtime
 RUN pip install --upgrade onnxruntime onnx
 
-
 # Copy the rest of the application code
 COPY . .
 
