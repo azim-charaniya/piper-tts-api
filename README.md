@@ -128,6 +128,7 @@ services:
     environment:
       - APP_PORT=17100
     restart: unless-stopped
+    hostname: piper-tts-server
 
 ```
 
