@@ -1,0 +1,13 @@
+# environment.yml
+name: tts-api-env  # Name of the environment
+channels:
+  - conda-forge  # Reliable channel for packages
+  - defaults
+dependencies:
+  - python=3.9  # Specify Python version
+  - flask  # Install Flask via Conda
+  - pydub  # Install pydub via Conda
+  - cachetools  # Install cachetools via Conda
+  - pip  # Include pip for packages not available in Conda
+  - pip:
+      - piper-tts  # Install Piper TTS via pip

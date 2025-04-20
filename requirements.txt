@@ -1,0 +1,4 @@
+flask
+piper-tts
+pydub
+cachetools
