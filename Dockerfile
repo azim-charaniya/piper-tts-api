@@ -8,6 +8,8 @@ FROM continuumio/miniconda3
 # Set the working directory
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y build-essential gcc ffmpeg
+
 # Copy requirements file and create Conda environment
 COPY environment.yml .
 
@@ -19,12 +21,6 @@ RUN conda env create -f environment.yml && \
 
 # ONNX Runtime
 RUN pip install --upgrade onnxruntime onnx
-
-# install ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg
-
-# install espeak-ng
-!apt-get -qq -y install espeak-ng > /dev/null 2>&1
 
 
 # Copy the rest of the application code

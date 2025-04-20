@@ -1,9 +1,4 @@
-flask~=3.1.0
+flask
 piper-tts
-pydub~=0.25.1
+pydub
 cachetools
-
-soundfile~=0.13.1
-kokoro~=0.9.4
-numpy~=2.2.5
-onnxruntime~=1.21.1

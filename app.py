@@ -12,9 +12,7 @@ import wave  # From original code
 from pathlib import Path  # Used in the original code for paths
 
 import pydub  # For audio format conversion
-import soundfile as sf
 from flask import Flask, request, send_file, jsonify
-from kokoro import KPipeline
 
 from piper_tts import PiperVoice  # Assuming this is from the piper-tts library; adjust if needed
 
@@ -210,58 +208,6 @@ def generate_audio_by_splitting(format_param, length_scale, noise_scale, noise_w
     combined_audio_file_path = os.path.join(CACHE_DIR, f"{str(uuid.uuid4())}.{format_param}")
     combined_audio.export(combined_audio_file_path, format=format_param)
     return combined_audio_file_path
-
-@app.route('/tts_kokoro', methods=['POST'])
-def tts_kokoro():
-    """ Request Body (JSON):
-    {
-        "text": "Required. Text to synthesize.",
-    }
-    """
-    # Clear cache
-    clear_audio_cache()
-
-    global pipeline
-
-    # Check if the pipeline is already loaded if not, load it
-    if pipeline is None:
-         pipeline = KPipeline(lang_code='a', device="cpu")
-
-    text = request.json.get('text', '').strip()
-    if not text:
-        return jsonify({"error": "Text is required."}), 400
-
-    # Decode text
-    text = text.encode('utf-8').decode('utf-8')
-
-    generator = pipeline(
-        text, voice='af_heart', speed=1, split_pattern=r'\n+'
-    )
-
-    audio_files = []
-    # Generate audio
-    for i, (gs, ps, audio) in enumerate(generator):
-        audio_file_path = os.path.join(CACHE_DIR, f"{str(uuid.uuid4())}.wav")
-        audio_files.append(audio_file_path)
-        sf.write(audio_file_path, audio, 24000) # save each audio file
-
-    # If multiple audio files, combine them
-    if len(audio_files) > 1:
-        combined_audio = pydub.AudioSegment.empty()
-        for audio_file in audio_files:
-            audio_segment = pydub.AudioSegment.from_file(audio_file)
-            combined_audio += audio_segment
-        # Save combined audio
-        combined_audio_file_path = os.path.join(CACHE_DIR, f"{str(uuid.uuid4())}.wav")
-        combined_audio.export(combined_audio_file_path, format='wav')
-        return send_file(combined_audio_file_path, mimetype='audio/wav', as_attachment=True,
-                         download_name=f'output_{uuid.uuid4()}.wav')
-    else:
-        return send_file(audio_files[0], mimetype='audio/wav', as_attachment=True,
-                         download_name=f'output_{uuid.uuid4()}.wav')
-
-    # Something went wrong
-    return jsonify({"error": "Audio generation failed."}), 500
 
 
 if __name__ == '__main__':
