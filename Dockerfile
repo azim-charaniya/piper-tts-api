@@ -17,6 +17,9 @@ RUN conda env create -f environment.yml && \
     conda init bash && \
     echo "source activate tts-api-env" >> ~/.bashrc  # Activate the environment on container start
 
+# ONNX Runtime
+RUN pip install --upgrade onnxruntime onnx
+
 # install ffmpeg
 RUN apt-get update && apt-get install -y ffmpeg
 
