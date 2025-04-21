@@ -7,7 +7,7 @@ dependencies:
   - python=3.9  # Specify Python version
   - flask  # Install Flask via Conda
   - pydub  # Install pydub via Conda
-  - cachetools  # Install cachetools via Conda
   - pip  # Include pip for packages not available in Conda
   - pip:
       - piper-tts  # Install Piper TTS via pip
+      - google-cloud-texttospeech  # Install Google Cloud TTS library via pip

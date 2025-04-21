@@ -2,3 +2,4 @@ flask
 piper-tts
 pydub
 cachetools
+google-cloud-texttospeech
