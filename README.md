@@ -108,6 +108,15 @@ curl -X POST http://localhost:17100/tts \
   --output output.wav
 ```
 
+### Example Curl command for Facebook TTS engine:
+
+```bash
+curl -X POST http://localhost:17100/tts \
+  -H "Content-Type: application/json" \
+  -d '{"engine": "facebook", "text": "Hello world", "format": "mp3"}' \
+  --output output.mp3
+```
+
 ### Troubleshooting
 
 Errors with Voice Models: Ensure files are in the voices/ directory. Check logs for file not found errors.
@@ -149,6 +158,13 @@ services:
     - If you need further customizations (e.g., adding more services or environment variables), let me know!
 
 This should wrap up your project setup. If you have any more questions, I'm here to help!
+
+
+### Building the Docker Image
+
+```agsl
+docker build -t piper-tts-api .
+```
 
 ### MIT License.
 

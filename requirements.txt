@@ -6,3 +6,4 @@ google-cloud-texttospeech
 google-cloud-speech
 transformers
 torch
+scipy

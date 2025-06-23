@@ -10,6 +10,8 @@ from engines.google_tts import handle_google_request
 # Import engine handlers
 from engines.piper_tts import handle_piper_request
 from engines.persian_tts import handle_persian_request  # <-- Add this import
+from engines.facebook_tts import handle_facebook_request  # <-- Add this import
+#from engines.gujarati_tts import handle_gujarati_request  # <-- Add this import
 from utils import clear_audio_cache  # Shared utility
 
 # Flask app setup
@@ -54,8 +56,18 @@ def tts_endpoint():
             return send_file(audio_file_path, mimetype=f'audio/{format_param}', as_attachment=True,
                              download_name=f'output_{uuid.uuid4()}.{format_param}')
 
+        elif engine == 'facebook':  # Facebook TTS engine
+            audio_file_path = handle_facebook_request(data, text, format_param)
+            return send_file(audio_file_path, mimetype=f'audio/{format_param}', as_attachment=True,
+                             download_name=f'output_{uuid.uuid4()}.{format_param}')
+
+      #  elif engine == 'gujarati':  # Gujarati TTS engine
+      #      audio_file_path = handle_gujarati_request(data, text, format_param)
+      #      return send_file(audio_file_path, mimetype=f'audio/{format_param}', as_attachment=True,
+      #                       download_name=f'output_{uuid.uuid4()}.{format_param}')
+
         else:
-            return jsonify({"error": f"Invalid engine '{engine}'. Use 'piper', 'google', or 'persian'."}), 400
+            return jsonify({"error": f"Invalid engine '{engine}'. Use 'piper', 'google', 'persian', 'facebook', or 'gujarati'."}), 400
 
     except Exception as e:
         logging.error(f"Error in TTS endpoint: {e}")
