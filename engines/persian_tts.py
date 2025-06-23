@@ -6,11 +6,12 @@ import scipy.io.wavfile
 import io
 from pydub import AudioSegment
 
-# Load model and tokenizer once at import time
-model = VitsModel.from_pretrained("SeyedAli/Persian-Speech-synthesis")
-tokenizer = AutoTokenizer.from_pretrained("SeyedAli/Persian-Speech-synthesis")
 
 def handle_persian_request(data, text, format_param):
+    # Load the VITS model and tokenizer
+    model = VitsModel.from_pretrained("SeyedAli/Persian-Speech-synthesis")
+    tokenizer = AutoTokenizer.from_pretrained("SeyedAli/Persian-Speech-synthesis")
+
     # Tokenize input text
     inputs = tokenizer(text, return_tensors="pt")
     # Generate waveform
