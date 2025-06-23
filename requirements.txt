@@ -3,3 +3,6 @@ piper-tts
 pydub
 cachetools
 google-cloud-texttospeech
+google-cloud-speech
+transformers
+torch

@@ -11,3 +11,6 @@ dependencies:
   - pip:
       - piper-tts  # Install Piper TTS via pip
       - google-cloud-texttospeech  # Install Google Cloud TTS library via pip
+      - google-cloud-speech
+      - transformers
+      - torch

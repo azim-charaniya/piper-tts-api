@@ -99,6 +99,15 @@ curl -X POST "http://localhost:17100/tts" \
      -o output.mp3
 ```
 
+### Example curl command to test Persian TTS engine:
+
+```bash
+curl -X POST http://localhost:17100/tts \
+  -H "Content-Type: application/json" \
+  -d '{"engine": "persian", "text": "سلام دنیا", "format": "wav"}' \
+  --output output.wav
+```
+
 ### Troubleshooting
 
 Errors with Voice Models: Ensure files are in the voices/ directory. Check logs for file not found errors.
